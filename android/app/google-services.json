@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "189137117376",
+    "firebase_url": "https://signin-cb5db.firebaseio.com",
+    "project_id": "signin-cb5db",
+    "storage_bucket": "signin-cb5db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189137117376:android:46a83d4b205ef68cebcd25",
+        "android_client_info": {
+          "package_name": "com.example.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189137117376-ktejpd6fio2vgmgqkf32vb5gra1jv9pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1U3HTc1G9GkmBeVmZ_Coob5VOzbV00uA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189137117376-ktejpd6fio2vgmgqkf32vb5gra1jv9pm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
