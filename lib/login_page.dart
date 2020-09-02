@@ -1,4 +1,7 @@
-import 'package:firebase/ITS_main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:firebase/admin_page.dart';
+import 'package:firebase/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -52,25 +55,51 @@ class _LoginPageState extends State<LoginPage> {
                 GoogleFonts.openSans(color: Colors.white, fontSize: 14),
               ),
               SizedBox(height: 50,),
-              buildTextField( nameController, "Email", Icons.account_circle),
+              buildTextField( nameController, "Email", Icons.account_circle, false),
               SizedBox(height: 30),
-              buildTextField( passwordController, "Password", Icons.lock),
+              buildTextField( passwordController, "Password", Icons.lock, true),
               SizedBox(height: 30),
 
-
+              // code for LOGIN BUTTON
               MaterialButton(
                 elevation: 0,
                 minWidth: double.maxFinite,
                 height: 50,
                 onPressed: () async {
-                  print(nameController.text);
+
+                  //code for firebase rolebased authentication
+
                   FirebaseUser firebaseUser;
                   firebaseAuth.signInWithEmailAndPassword(
                       email: nameController.text, password: passwordController.text).then((
                       authResult) {
-                    setState(() {
-                      firebaseUser = authResult.user;
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomePage()));
+                    FirebaseAuth.instance.currentUser().then((user){
+                      Firestore.instance
+                          .collection('users')
+                          .where('uid',isEqualTo: user.uid)
+                          .getDocuments()
+                          .then((docs){
+                            //condtion check that email_id exist
+
+                        if (docs.documents[0].exists) {
+
+                          //condition check that email_id is belonging to admin
+
+                          if (docs.documents[0].data['role'] == 'admin') {
+                            setState(() {
+                              Navigator.push((context),
+                              MaterialPageRoute(builder: (BuildContext context) => AdminPage()));
+                            });
+                          } else {
+                            //condion for email_id belonging to user or student
+
+                            setState(() {
+                              Navigator.push((context),
+                                  MaterialPageRoute(builder: (BuildContext context) => DashboardPage()));
+                            });
+                          }
+                        }
+                      });
                     });
                   });
                   print(firebaseUser.email);
@@ -145,12 +174,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 
-  buildTextField( TextEditingController controller, String labelText, IconData icon) {
+  buildTextField( TextEditingController controller, String labelText, IconData icon, txtpass) {
     return Container(
       decoration: BoxDecoration(
           color: secondaryColor,
           border: Border.all(color: Colors.blue,)),
       child: TextField(
+        obscureText: txtpass,
         controller: controller,
         style: TextStyle(color: Colors.white,),
         decoration: InputDecoration(
@@ -168,4 +198,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-

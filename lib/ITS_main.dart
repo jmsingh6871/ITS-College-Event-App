@@ -13,6 +13,7 @@ class _WelcomePageState extends State<WelcomePage> {
       appBar: AppBar(
         title: Text('Welcom to ITS Mohan Nagar'),
       ),
+
     );
   }
 }
