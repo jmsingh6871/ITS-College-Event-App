@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:firebase/admin_page.dart';
-import 'package:firebase/dashboard.dart';
+import 'package:firebase/user_dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase/admin_dashboard.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -88,14 +88,14 @@ class _LoginPageState extends State<LoginPage> {
                           if (docs.documents[0].data['role'] == 'admin') {
                             setState(() {
                               Navigator.push((context),
-                              MaterialPageRoute(builder: (BuildContext context) => AdminPage()));
+                              MaterialPageRoute(builder: (BuildContext context) => Admin_DashboardPage()));
                             });
                           } else {
                             //condion for email_id belonging to user or student
 
                             setState(() {
                               Navigator.push((context),
-                                  MaterialPageRoute(builder: (BuildContext context) => DashboardPage()));
+                                  MaterialPageRoute(builder: (BuildContext context) => User_DashboardPage()));
                             });
                           }
                         }
