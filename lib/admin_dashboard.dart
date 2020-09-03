@@ -1,3 +1,4 @@
+import 'package:firebase/services/addevent.dart';
 import 'package:firebase/user_dashboard.dart';
 import 'package:firebase/admin_page.dart';
 
@@ -15,13 +16,18 @@ class Admin_DashboardPage extends StatefulWidget {
 
 class _Admin_DashboardPageState extends State<Admin_DashboardPage> {
 
+  Color primaryColor = Color(0xff18203d);
+  Color secondaryColor = Color(0xff232c51);
+  Color logoGreen = Color(0xff25bcbb);
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: primaryColor,
         appBar: AppBar(
           title: Text('Admin Dashboard'),
           centerTitle: true,
+          backgroundColor: Colors.transparent,
         ),
         drawer: Drawer(
           child: ListView(
@@ -75,13 +81,23 @@ class _Admin_DashboardPageState extends State<Admin_DashboardPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              RaisedButton(
-                child: Text('Add Event'),
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                  ))
-                },
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Center(
+                  child: MaterialButton(
+                    child: Text('Add Event',style: TextStyle(color: Colors.white, fontSize: 16),),
+                    elevation: 0,
+                    minWidth: 30.0,
+                    height: 50,
+
+                    color: logoGreen,
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (BuildContext context) => addevent()
+                      ));
+                    },
+                  ),
+                ),
               ),
             ],
           ),

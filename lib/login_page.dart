@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/user_dashboard.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase/admin_dashboard.dart';
 
+import 'package:firebase/admin_page.dart';
+import 'package:firebase/admin_dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,10 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+
       body: Container(
         alignment: Alignment.topCenter,
         margin: EdgeInsets.symmetric(horizontal: 30),
@@ -41,7 +39,9 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              SizedBox(height: MediaQuery.of(context).size.height*0.15,),
               Text(
+
                 'Sign in to ITS Mohan Nagar',
                 textAlign: TextAlign.center,
                 style:
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
                 onPressed: () async {
 
-                  //code for firebase rolebased authentication
+                  ////////////code for firebase rolebased authentication////////////
 
                   FirebaseUser firebaseUser;
                   firebaseAuth.signInWithEmailAndPassword(
@@ -79,11 +79,11 @@ class _LoginPageState extends State<LoginPage> {
                           .where('uid',isEqualTo: user.uid)
                           .getDocuments()
                           .then((docs){
-                            //condtion check that email_id exist
+                     ////////////////////condtion check that email_id exist//////////////
 
                         if (docs.documents[0].exists) {
 
-                          //condition check that email_id is belonging to admin
+               //////////////condition check that email_id is belonging to admin///////////
 
                           if (docs.documents[0].data['role'] == 'admin') {
                             setState(() {
