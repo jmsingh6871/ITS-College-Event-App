@@ -1,12 +1,12 @@
- import 'package:firebase/event_details.dart';
+import 'package:firebase/event_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
- import 'package:cloud_firestore/cloud_firestore.dart';
- import 'package:flutter_swiper/flutter_swiper.dart';
- import 'data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'data.dart';
 
 class User_DashboardPage extends StatefulWidget {
 
@@ -29,7 +29,7 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
 
   navigateToDetail(DocumentSnapshot index){
     Navigator.push(context, MaterialPageRoute(
-      builder: (context)  => DetailPage(index: index,)
+        builder: (context)  => DetailPage(index: index,)
     ));
   }
 
@@ -43,39 +43,7 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
       ),
-      drawer: Drawer(
 
-        child: ListView(
-          children: <Widget>[
-            FutureBuilder(
-              future: Provider.of(context).auth.getCurrentUID,
-            )
-            new UserAccountsDrawerHeader(
-              accountName: new Text(''),
-              accountEmail: new Text('niteshnagpal190@.com'),
-              currentAccountPicture: new CircleAvatar(
-                backgroundImage: new NetworkImage('http://i.pravatar.cc/300'),
-              ),
-            ),
-
-            new ListTile(
-              title: new Text('Logout', style: TextStyle(color: Colors.red)),
-
-              onTap: () {
-                // Navigator.of(context).pop();
-                FirebaseAuth.instance.signOut();
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
-                // Navigator.push(context,
-                // MaterialPageRoute(builder: (BuildContext context) =>LoginPage()));
-                // Navigator.of(context).pop();
-                // userObj.signOut();
-                // });
-              },
-            ),
-          ],
-        ),
-      ),
       body: Container(
 
         alignment: Alignment.topCenter,
@@ -149,7 +117,7 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
                                             ),
                                             SizedBox(height: 8,),
                                             Text(
-                                               snapshot.data[index].data['date'],
+                                              snapshot.data[index].data['date'],
                                               style: TextStyle(
                                                 fontFamily: 'Avenir',
                                                 fontSize: 18,
