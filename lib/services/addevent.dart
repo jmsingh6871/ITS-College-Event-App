@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 import 'package:firebase/user_dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,14 +22,18 @@ class _addeventState extends State<addevent> {
   TextEditingController edes = TextEditingController();
   TextEditingController edate = TextEditingController();
   TextEditingController elink = TextEditingController();
+  TextEditingController eorg = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
-
+        title: Text('Add Event',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.openSans(color: Colors.white, fontSize: 28),),
         backgroundColor: Colors.transparent,
+        centerTitle: true,
         elevation: 0.0,
       ),
       drawer: Drawer(
@@ -92,10 +96,10 @@ class _addeventState extends State<addevent> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text('Add Event',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.openSans(color: Colors.white, fontSize: 28),
-              ),
+              // Text('Add Event',
+              //   textAlign: TextAlign.center,
+              //   style: GoogleFonts.openSans(color: Colors.white, fontSize: 28),
+              // ),
               SizedBox(height: 20.0,),
               Text('Enter the details of event',
                 textAlign: TextAlign.center,
@@ -110,6 +114,8 @@ class _addeventState extends State<addevent> {
               SizedBox(height: 30),
               buildTextField(elink, "Link", Icons.link,null),
               SizedBox(height: 30),
+              buildTextField(eorg, "Organiser", Icons.people,null),
+              SizedBox(height: 30),
               MaterialButton(
                 elevation: 0,
                 minWidth: double.maxFinite,
@@ -120,6 +126,7 @@ class _addeventState extends State<addevent> {
                     'date' : edate.text,
                     'description' : edes.text,
                     'link' : elink.text,
+                    'organiser': eorg.text
                   };
 
                   CollectionReference collectionRefernce = Firestore.instance.collection('data');

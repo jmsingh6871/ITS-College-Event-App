@@ -130,6 +130,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   final FirebaseUser user = (await firebaseAuth
                       .signInWithCredential(credential)).user;
+
                 },
                 color: Colors.blue,
                 child: Row(
