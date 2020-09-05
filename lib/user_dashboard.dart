@@ -20,6 +20,7 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
   Color secondaryColor = Color(0xff232c51);
   Color logoGreen = Color(0xff25bcbb);
 
+
   Future getPost() async{
     var firestore =Firestore.instance;
     QuerySnapshot qn = await firestore.collection('data').getDocuments();
@@ -32,6 +33,7 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
     ));
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,10 +44,14 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
         backgroundColor: Colors.transparent,
       ),
       drawer: Drawer(
+
         child: ListView(
           children: <Widget>[
+            FutureBuilder(
+              future: Provider.of(context).auth.getCurrentUID,
+            )
             new UserAccountsDrawerHeader(
-              accountName: new Text('Nitesh Nagpal'),
+              accountName: new Text(''),
               accountEmail: new Text('niteshnagpal190@.com'),
               currentAccountPicture: new CircleAvatar(
                 backgroundImage: new NetworkImage('http://i.pravatar.cc/300'),
@@ -114,7 +120,7 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
                                       ),
                                       color: Colors.white,
                                       child: Padding(
-                                        padding: EdgeInsets.all(32.0),
+                                        padding: EdgeInsets.all(55.0),
                                         child: Column(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,6 +139,17 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
                                             SizedBox(height: 8,),
                                             Text(
                                               'by ' + snapshot.data[index].data['organiser'],
+                                              style: TextStyle(
+                                                fontFamily: 'Avenir',
+                                                fontSize: 18,
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                              textAlign: TextAlign.left,
+                                            ),
+                                            SizedBox(height: 8,),
+                                            Text(
+                                               snapshot.data[index].data['date'],
                                               style: TextStyle(
                                                 fontFamily: 'Avenir',
                                                 fontSize: 18,

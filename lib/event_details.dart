@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'data.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
   final DocumentSnapshot index;
@@ -113,9 +114,10 @@ class _DetailPageState extends State<DetailPage> {
                                     style: TextStyle(color: Colors.white,fontSize: 16),
                                   ),
                                   color: Color(0xff25bcbb),
-                                  onPressed: (){
-                                    String url = widget.index.data['link'];
-                                    launch(url);
+                                  onPressed: () {
+                                    print(widget.index.data['link']);
+                                    var url = widget.index.data['link'];
+                                    launch(url.toString());
                                   },
                                 ),
                               ),
