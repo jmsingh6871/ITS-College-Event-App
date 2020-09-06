@@ -31,12 +31,7 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
   }
 
 
-  getUserdata(){
-    String str = widget.currentPage.email;
-    var arr = str.split('_');
-    var sname=  Text(arr[0]);
-    return sname;
-  }
+
 
 
   navigateToDetail(DocumentSnapshot index){
@@ -58,13 +53,7 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            new UserAccountsDrawerHeader(
-              accountName: getUserdata(),
-              accountEmail: Text(widget.currentPage.email ?? ''),
-              currentAccountPicture: new CircleAvatar(
-                backgroundImage: new NetworkImage(widget.currentPage.photoUrl ?? ''),
-              ),
-            ),
+
 
 
             new ListTile(

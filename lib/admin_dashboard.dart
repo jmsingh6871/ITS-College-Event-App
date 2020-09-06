@@ -26,12 +26,7 @@ class _Admin_DashboardPageState extends State<Admin_DashboardPage> {
   Color secondaryColor = Color(0xff232c51);
   Color logoGreen = Color(0xff25bcbb);
 
-  getUserdata(){
-    String str = widget.currentPage.email;
-    var arr = str.split('_');
-    var sname=  Text(arr[0]);
-    return sname;
-  }
+
 
 
   @override
@@ -46,15 +41,6 @@ class _Admin_DashboardPageState extends State<Admin_DashboardPage> {
         drawer: Drawer(
           child: ListView(
             children: <Widget>[
-              new UserAccountsDrawerHeader(
-
-
-                accountName: getUserdata(),
-                accountEmail: Text(widget.currentPage.email ?? ''),
-                currentAccountPicture: new CircleAvatar(
-                  backgroundImage: new NetworkImage(widget.currentPage.photoUrl ?? ''),
-                ),
-              ),
               new ListTile(
                 title: new Text('Allusers Page'),
                 onTap: () {
