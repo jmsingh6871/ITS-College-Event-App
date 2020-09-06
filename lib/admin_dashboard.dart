@@ -1,3 +1,4 @@
+
 import 'package:firebase/services/addevent.dart';
 import 'package:firebase/user_dashboard.dart';
 import 'package:firebase/admin_page.dart';
@@ -10,6 +11,11 @@ import 'package:flutter/widgets.dart';
 
 
 class Admin_DashboardPage extends StatefulWidget {
+// this is use to get the details of current user
+  final FirebaseUser currentPage;
+  Admin_DashboardPage({@required this.currentPage});
+
+
   @override
   _Admin_DashboardPageState createState() => _Admin_DashboardPageState();
 }
@@ -19,6 +25,14 @@ class _Admin_DashboardPageState extends State<Admin_DashboardPage> {
   Color primaryColor = Color(0xff18203d);
   Color secondaryColor = Color(0xff232c51);
   Color logoGreen = Color(0xff25bcbb);
+
+  getUserdata(){
+    String str = widget.currentPage.email;
+    var arr = str.split('_');
+    var sname=  Text(arr[0]);
+    return sname;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +47,12 @@ class _Admin_DashboardPageState extends State<Admin_DashboardPage> {
           child: ListView(
             children: <Widget>[
               new UserAccountsDrawerHeader(
-                accountName: new Text('Nitesh Nagpal'),
-                accountEmail: new Text('niteshnagpal190@.com'),
+
+
+                accountName: getUserdata(),
+                accountEmail: Text(widget.currentPage.email ?? ''),
                 currentAccountPicture: new CircleAvatar(
-                  backgroundImage: new NetworkImage('http://i.pravatar.cc/300'),
+                  backgroundImage: new NetworkImage(widget.currentPage.photoUrl ?? ''),
                 ),
               ),
               new ListTile(

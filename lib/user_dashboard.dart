@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:firebase/event_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -6,9 +7,11 @@ import 'package:flutter/widgets.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'data.dart';
+
 
 class User_DashboardPage extends StatefulWidget {
+  final FirebaseUser currentPage;
+  User_DashboardPage({@required this.currentPage});
 
   @override
   _User_DashboardPageState createState() => _User_DashboardPageState();
@@ -27,6 +30,15 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
     return qn.documents;
   }
 
+
+  getUserdata(){
+    String str = widget.currentPage.email;
+    var arr = str.split('_');
+    var sname=  Text(arr[0]);
+    return sname;
+  }
+
+
   navigateToDetail(DocumentSnapshot index){
     Navigator.push(context, MaterialPageRoute(
         builder: (context)  => DetailPage(index: index,)
@@ -42,6 +54,36 @@ class _User_DashboardPageState extends State<User_DashboardPage> {
         title: Text('Events'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountName: getUserdata(),
+              accountEmail: Text(widget.currentPage.email ?? ''),
+              currentAccountPicture: new CircleAvatar(
+                backgroundImage: new NetworkImage(widget.currentPage.photoUrl ?? ''),
+              ),
+            ),
+
+
+            new ListTile(
+              title: new Text('Logout', style: TextStyle(color: Colors.red)),
+
+              onTap: () {
+                // Navigator.of(context).pop();
+                FirebaseAuth.instance.signOut();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                // Navigator.push(context,
+                // MaterialPageRoute(builder: (BuildContext context) =>LoginPage()));
+                // Navigator.of(context).pop();
+                // userObj.signOut();
+                // });
+              },
+            ),
+          ],
+        ),
       ),
 
       body: Container(

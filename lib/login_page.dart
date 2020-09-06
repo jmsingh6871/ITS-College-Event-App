@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/user_dashboard.dart';
 
-import 'package:firebase/admin_page.dart';
+
 import 'package:firebase/admin_dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   final  TextEditingController nameController = TextEditingController();
   final  TextEditingController passwordController = TextEditingController();
 
-
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
@@ -88,14 +89,14 @@ class _LoginPageState extends State<LoginPage> {
                           if (docs.documents[0].data['role'] == 'admin') {
                             setState(() {
                               Navigator.push((context),
-                              MaterialPageRoute(builder: (BuildContext context) => Admin_DashboardPage()));
+                              MaterialPageRoute(builder: (BuildContext context) => Admin_DashboardPage(currentPage: user)));
                             });
                           } else {
                             //condion for email_id belonging to user or student
 
                             setState(() {
                               Navigator.push((context),
-                                  MaterialPageRoute(builder: (BuildContext context) => User_DashboardPage()));
+                                  MaterialPageRoute(builder: (BuildContext context) => User_DashboardPage(currentPage: user)));
                             });
                           }
                         }
@@ -130,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   final FirebaseUser user = (await firebaseAuth
                       .signInWithCredential(credential)).user;
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => User_DashboardPage()));
                 },
                 color: Colors.blue,
                 child: Row(

@@ -36,6 +36,7 @@ dependencies:
   google_fonts:
   flutter_swiper:
   url_launcher:
+  basic_utils:
 
 dev_dependencies:
   flutter_test:
