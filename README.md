@@ -1,4 +1,4 @@
-# ITS College Event Project
+# Institute of Technology and Science College Event Project
 
 A new Flutter project.
 
